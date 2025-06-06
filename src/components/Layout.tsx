@@ -1,11 +1,12 @@
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 
 let clickCount = 0;
 let clickTimer: ReturnType<typeof setTimeout>;
 
 const handleTripleClick = () => {
+    const navigate = useNavigate();
     clickCount++;
-
+    navigate('/tenantguard')
     clearTimeout(clickTimer);
     clickTimer = setTimeout(() => {
         clickCount = 0;
