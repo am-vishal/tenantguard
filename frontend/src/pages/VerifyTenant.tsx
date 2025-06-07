@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
-import Loader from '../components/Loader';  // Adjust path as needed
+import { useState, useEffect, FC } from 'react';
+import Loader from '../components/shared/Loader';  // Adjust path as needed
 import { fetchPing, PingResponse } from '../utils/api';
 
-const VerifyTenant: React.FC = () => {
+const VerifyTenant: FC = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [message, setMessage] = useState<string>('');
     const [error, setError] = useState<string | null>(null);

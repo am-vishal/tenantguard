@@ -1,48 +1,42 @@
-import React, { useState } from "react";
-import { PaymentTable } from "../components/PaymentTable";
-import { FilterBar } from "../components/FilterBar";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import TenantList from '../components/tenant/TenantList';
+import TenantDetails from '../components/tenant/TenantDetails';
+import { Tenant } from '../types';
+import { generateMockTenants } from '../utils/generateMockTenants';
+import Header from '../components/layout/Header';
 
-interface Payment {
-    month: string;
-    status: string;
-    comments: string;
-}
-
-const mockPayments: Payment[] = [
-    { month: "January", status: "On Time", comments: "Paid via UPI" },
-    { month: "February", status: "After Due date", comments: "Paid 3 days late" },
-    { month: "March", status: "Not Paid", comments: "Pending" },
-    { month: "April", status: "Before due date", comments: "Paid early" },
-];
+const tenants: Tenant[] = generateMockTenants(12);
 
 export const Dashboard: React.FC = () => {
-    const [aadharVerified, setAadharVerified] = useState(true); // replace with real check
-    const [propertyRegistered, setPropertyRegistered] = useState(true); // replace with real check
-    const [statusFilter, setStatusFilter] = useState("All");
+    const [selectedId, setSelectedId] = useState<number | null>(tenants[0]?.id ?? null);
+    const navigate = useNavigate();
 
-    const filteredPayments =
-        statusFilter === "All"
-            ? mockPayments
-            : mockPayments.filter((p) => p.status === statusFilter);
+    const handleClick = () => {
+        navigate('/'); // or navigate to home
+    };
+
+    const onBack = () => {
+        navigate(-1); // go back to previous page
+    };
 
     return (
-        <div className="p-6 max-w-5xl mx-auto">
-            <h1 className="text-2xl font-bold mb-4">TenantGuard Dashboard</h1>
+        <div className="flex flex-col bg-gray-50 min-h-screen">
+            <Header handleClick={handleClick} onBack={onBack} />
+            {/* Content */}
+            <main className="flex flex-1 overflow-hidden pt-16 px-6 gap-6">
+                {/* Tenant List - Left */}
+                <TenantList
+                    tenants={tenants}
+                    selectedId={selectedId}
+                    onSelect={setSelectedId}
+                />
 
-            {!aadharVerified ? (
-                <div className="bg-yellow-100 text-yellow-800 p-4 rounded-md">
-                    Please verify your Aadhar number to proceed.
-                </div>
-            ) : !propertyRegistered ? (
-                <div className="bg-red-100 text-red-800 p-4 rounded-md">
-                    Please register at least one property to access tenant search.
-                </div>
-            ) : (
-                <>
-                    <FilterBar selectedStatus={statusFilter} onChange={setStatusFilter} />
-                    <PaymentTable data={filteredPayments} />
-                </>
-            )}
+                {/* Tenant Details - Right */}
+                <TenantDetails
+                    tenant={tenants.find((t) => t.id === selectedId) ?? null}
+                />
+            </main>
         </div>
     );
 };

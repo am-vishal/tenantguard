@@ -8,8 +8,8 @@ import {
     isValidPassword,
     isValidPhone,
     useScrollBlock
-} from '../utils/validators';
-import Loader from './Loader';
+} from '../../utils/validators';
+import Loader from '../shared/Loader';
 import { IoMdClose } from 'react-icons/io';
 
 type AuthModalProps = {

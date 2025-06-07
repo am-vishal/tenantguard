@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
-import Loader from '../components/Loader';
-import HeroSection from '../components/HeroSection';
-import WelcomeSection from '../components/WelcomeSection';
-import FeaturesSection from '../components/FeaturesSection';
-import HowItWorksSection from '../components/HowItWorksSection';
-import WhyChooseUsSection from '../components/WhyChooseUsSection';
-import CTASection from '../components/CTASection';
-import ContactSection from '../components/ContactSection';
-import TenantBackgroundSection from '../components/TenantBackgroundSection';
+import Loader from '../components/shared/Loader';
+import HeroSection from '../components/sections/HeroSection';
+import WelcomeSection from '../components/sections/WelcomeSection';
+import FeaturesSection from '../components/sections/FeaturesSection';
+import HowItWorksSection from '../components/sections/HowItWorksSection';
+import WhyChooseUsSection from '../components/sections/WhyChooseUsSection';
+import CTASection from '../components/sections/CTASection';
+import ContactSection from '../components/sections/ContactSection';
+import TenantBackgroundSection from '../components/tenant/TenantBackgroundSection';
 
 const Home = () => {
   const [loading, setLoading] = useState(true);

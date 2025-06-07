@@ -1,5 +1,5 @@
 import React from 'react';
-import AuthModal from './AuthModal';
+import AuthModal from '../auth/AuthModal';
 
 const HeroSection = ({
     isLoggedIn,
