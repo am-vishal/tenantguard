@@ -18,18 +18,23 @@ const Home = () => {
 
   useEffect(() => {
     const checkAuth = () => {
-      const user = localStorage.getItem('tenantguard_user');
-      const admin = localStorage.getItem('tenantguard_admin');
-
-      if (user) {
-        setIsSignedUp(true);
-      }
-      if (admin) {
-        setIsLoggedIn(true);
+      const stored = localStorage.getItem('tenantguard');
+      if (stored) {
+        try {
+          const user = JSON.parse(stored);
+          if (user.role === 'admin') {
+            setIsLoggedIn(true);
+          } else {
+            setIsSignedUp(true);
+          }
+        } catch (err) {
+          console.error('Error parsing tenantguard data:', err);
+        }
       }
 
       setLoading(false);
     };
+
     setTimeout(checkAuth, 300);
   }, []);
 

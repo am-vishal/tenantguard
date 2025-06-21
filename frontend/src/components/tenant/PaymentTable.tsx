@@ -1,11 +1,6 @@
 import React from "react";
 import { StatusBadge } from "./StatusBadge";
-
-interface Payment {
-    month: string;
-    status: string;
-    comments: string;
-}
+import { Payment } from '../../types/index.ts';
 
 interface PaymentTableProps {
     data: Payment[];

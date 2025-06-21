@@ -11,10 +11,27 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
     const [shouldRedirect, setShouldRedirect] = useState(false);
 
     useEffect(() => {
-        const isAdmin = localStorage.getItem('tenantguard_admin') === 'true';
-        setIsAllowed(isAdmin);
-
-        if (!isAdmin) {
+        const stored = localStorage.getItem('tenantguard');
+        if (stored) {
+            try {
+                const user = JSON.parse(stored);
+                if (user.role === 'admin') {
+                    setIsAllowed(true);
+                } else {
+                    const interval = setInterval(() => {
+                        setCountdown((prev) => {
+                            if (prev === 1) {
+                                clearInterval(interval);
+                                setShouldRedirect(true);
+                            }
+                            return prev - 1;
+                        });
+                    }, 1000);
+                }
+            } catch (err) {
+                console.error('Error parsing tenantguard data:', err);
+            }
+        } else {
             const interval = setInterval(() => {
                 setCountdown((prev) => {
                     if (prev === 1) {
@@ -26,8 +43,6 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
             }, 1000);
         }
     }, []);
-
-    if (isAllowed === null) return null; // loader could be shown
 
     if (shouldRedirect) return <Navigate to="/" />;
 

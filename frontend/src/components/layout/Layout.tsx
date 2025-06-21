@@ -1,11 +1,13 @@
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { useRef } from 'react';
+import UserDropdown from '../tenant/UserDropdown';
 
 export default function Layout() {
     const navigate = useNavigate();
     const clickCount = useRef(0);
     const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-    const isAdmin = localStorage.getItem('tenantguard_admin') === 'true'
+    const user = JSON.parse(localStorage.getItem('tenantguard') || '{}');
+    const isAdmin = user.role === 'admin';
 
     const handleClick = () => {
         clickCount.current += 1;
@@ -18,8 +20,7 @@ export default function Layout() {
             if (clickCount.current === 1) {
                 navigate('/'); // Single click → go to homepage
             } else if (clickCount.current === 2) {
-                localStorage.removeItem('tenantguard_user');
-                localStorage.removeItem('tenantguard_admin');
+                localStorage.removeItem('tenantguard');
                 window.location.reload(); // Optional reload after clearing
             }
             clickCount.current = 0; // reset counter
@@ -57,12 +58,13 @@ export default function Layout() {
                         Contact
                     </Link>
                     {isAdmin && (
-                        <Link
-                            to="admin"
-                            className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-4 py-2 rounded-xl shadow hover:scale-105 transition-transform text-sm font-semibold"
-                        >
-                            Admin Dashboard
-                        </Link>
+                        <UserDropdown />
+                        // <Link
+                        //     to="admin"
+                        //     className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-4 py-2 rounded-xl shadow hover:scale-105 transition-transform text-sm font-semibold"
+                        // >
+                        //     Admin Dashboard
+                        // </Link>
                     )}
                 </nav>
             </header>

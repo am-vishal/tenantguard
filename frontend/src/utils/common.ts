@@ -28,9 +28,27 @@ const isEmptyArrayOrObject = (value: unknown): boolean => {
     return false;
 };
 
+/**
+ * @param firstName  - First Name
+ * @param lastName  - Last Name
+ * @param gender - Gender
+ * @returns - Formatted Name
+ */
+const formatTenantName = (firstName: string, lastName: string, gender: string): string => {
+    if (gender === 'Female' && lastName === 'Kumar') {
+        return `${firstName} Kumari`;
+    }
+    return `${firstName} ${lastName}`;
+};
+
+
+const stored = localStorage.getItem('IsTempDisabled') || 'false';
+const IsTempDisabled: boolean = stored === 'true';
 
 export {
     isEmpty,
     isNaN,
     isEmptyArrayOrObject,
+    formatTenantName,
+    IsTempDisabled
 };

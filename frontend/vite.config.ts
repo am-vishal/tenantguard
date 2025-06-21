@@ -6,7 +6,10 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
   base: 'https://am-vishal.github.io/tenantguard', //yahan pe jo bhi repo ka naam hoga add karna hai!
   plugins: [react(), tailwindcss(),],
-  server: {
-    // historyApiFallback: true,
-  }
+  // server: {
+  //   host: '0.0.0.0', // or use '0.0.0.0'
+  //   port: 5173
+  //   // historyApiFallback: true,
+  // }
 });
+

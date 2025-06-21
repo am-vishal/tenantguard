@@ -28,13 +28,13 @@
     "noUncheckedSideEffectImports": true
   },
   "include": [
-    "frontend/src"
+    "src"
   ],
   "exclude": [
     "node_modules/",
     "backend/",
     "dist/",
     "deps/",
-    "frontend/deps/"
+    "deps/"
   ]
 }

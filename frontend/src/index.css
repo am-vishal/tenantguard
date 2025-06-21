@@ -15,3 +15,26 @@
 .animate-fade-in {
     animation: fade-in 0.3s ease-out;
 }
+
+/* global.css or similar */
+::-webkit-scrollbar {
+    width: 0;
+    /* Adjust width as needed */
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+    /* Light background for the track */
+}
+
+::-webkit-scrollbar-thumb {
+    background: transparent;
+    /* Darker color for the thumb */
+    border-radius: 0;
+    /* Rounded corners for the thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: transparent;
+    /* Slightly darker on hover */
+}
