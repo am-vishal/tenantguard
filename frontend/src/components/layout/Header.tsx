@@ -1,7 +1,4 @@
-import { FaArrowLeft } from "react-icons/fa";
-
-
-const Header = ({ handleClick, onBack }: { handleClick: () => void; onBack: () => void }) => {
+const Header = ({ handleClick }: { handleClick: () => void; onBack: () => void }) => {
     return (
         <header className="fixed top-0 left-0 w-full z-50 bg-white shadow-md border-b border-gray-200 p-3">
             <div className="flex items-center justify-between">
